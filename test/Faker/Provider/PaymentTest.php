@@ -197,4 +197,20 @@ final class PaymentTest extends TestCase
 
         yield new PaymentProvider($this->faker);
     }
+
+    public function testSwiftBicNumber(): void
+    {
+        self::assertMatchesRegularExpression(
+            '/^([A-Z]){4}([A-Z]){2}([0-9A-Z]){2}([0-9A-Z]{3})?$/',
+            $this->faker->swiftBicNumber(),
+        );
+    }
+
+    public function testLocalizedSwiftBicNumber(): void
+    {
+        self::assertMatchesRegularExpression(
+            '/^([A-Z]){4}DE([0-9A-Z]){2}([0-9A-Z]{3})?$/',
+            $this->faker->swiftBicNumber('DE'),
+        );
+    }
 }
